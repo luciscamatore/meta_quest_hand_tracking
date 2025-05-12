@@ -203,8 +203,11 @@ public class DebugTextUpdater : MonoBehaviour
         float angle2 = UnityEngine.Vector3.Angle(dir2, dir3);
 
         float totalCurl = angle1 + angle2;
+        float minAngle = 0f;
+        float maxAngle = 120f;
+        float normalizedCurl = Mathf.InverseLerp(minAngle, maxAngle, totalCurl);
 
-        return Mathf.Clamp01(totalCurl / maxFingerCount) * 100f;
+        return Mathf.Clamp(normalizedCurl * 100, 0f, 100f);
     }
 
     void OnApplicationQuit()
